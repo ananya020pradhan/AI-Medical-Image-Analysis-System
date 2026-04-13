@@ -46,22 +46,34 @@ show_gradcam = st.sidebar.checkbox("Show Grad-CAM", True)
 threshold = st.sidebar.slider("Confidence Threshold", 0.0, 1.0, 0.5)
 
 # ================= LOAD MODEL =================
-model = None
+import os
+import urllib.request
+import streamlit as st
 
-try:
-    from keras.models import load_model
+MODEL_PATH = "model.h5"
 
-    MODEL_PATH = "model.h5"
+@st.cache_resource
 
-    # Download model if not present
-    if not os.path.exists(MODEL_PATH):
-        url = "https://drive.google.com/uc?export=download&id=1lOpMb2k2Bz-rY0j6G9ZcKbFzvtalw62O"
-        urllib.request.urlretrieve(url, MODEL_PATH)
+def load_my_model():
+    try:
+        from keras.models import load_model
 
-    model = load_model(MODEL_PATH)
+        # Download model if not present
+        if not os.path.exists(MODEL_PATH):
+            url = "https://drive.google.com/uc?export=download&id=1lOpMb2k2Bz-rY0j6G9ZcKbFzvtalw62O"
+            urllib.request.urlretrieve(url, MODEL_PATH)
+          
 
-except Exception as e:
-    st.warning("⚠️ Model not loaded. Running in demo mode.")
+        model = load_model(MODEL_PATH)
+        return model
+
+    except Exception as e:
+        st.error(f"Model loading failed: {e}")
+        return None
+
+
+model = load_my_model()
+
 
 IMG_SIZE = 224
 CLASSES = ["NORMAL", "PNEUMONIA", "COVID", "TUMOR"]

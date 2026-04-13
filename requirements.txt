@@ -7,3 +7,4 @@ matplotlib
 pillow
 reportlab
 scikit-learn
+gdown
