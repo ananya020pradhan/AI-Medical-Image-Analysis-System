@@ -31,7 +31,7 @@ def predict_image(image):
     if model is not None:
         prediction = model.predict(img)
     else:
-        return "Demo Mode", 0.0
+        prediction = "Demo Mode Prediction"
     
     pred_class = CLASSES[np.argmax(prediction)]
     confidence = np.max(prediction)
