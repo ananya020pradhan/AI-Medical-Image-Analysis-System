@@ -1,7 +1,7 @@
 streamlit
 numpy
 opencv-python-headless
-tensorflow
+tensorflow==2.15.0
 keras
 matplotlib
 pillow
