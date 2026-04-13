@@ -6,6 +6,8 @@ from keras.models import load_model
 from src.gradcam import get_gradcam
 from src.report import generate_report
 import tempfile
+import urllib.request
+import os
 
 # ================= PAGE CONFIG =================
 st.set_page_config(
@@ -44,7 +46,22 @@ show_gradcam = st.sidebar.checkbox("Show Grad-CAM", True)
 threshold = st.sidebar.slider("Confidence Threshold", 0.0, 1.0, 0.5)
 
 # ================= LOAD MODEL =================
-model = load_model("models/model.h5")
+model = None
+
+try:
+    from keras.models import load_model
+
+    MODEL_PATH = "model.h5"
+
+    # Download model if not present
+    if not os.path.exists(MODEL_PATH):
+        url = "https://drive.google.com/uc?export=download&id=1lOpMb2k2Bz-rY0j6G9ZcKbFzvtalw62O"
+        urllib.request.urlretrieve(url, MODEL_PATH)
+
+    model = load_model(MODEL_PATH)
+
+except Exception as e:
+    st.warning("⚠️ Model not loaded. Running in demo mode.")
 
 IMG_SIZE = 224
 CLASSES = ["NORMAL", "PNEUMONIA", "COVID", "TUMOR"]
