@@ -168,3 +168,4 @@ else:
 # ================= FOOTER =================
 st.markdown("---")
 st.caption("⚕️ AI system for educational use only. Not a replacement for doctors.")
+st.info("ℹ️ Model runs locally. Cloud version is in demo mode due to size limitations.")
