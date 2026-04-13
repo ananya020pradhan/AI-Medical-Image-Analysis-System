@@ -75,11 +75,26 @@ uploaded_files = st.file_uploader(
 
 # ================= PREDICTION FUNCTION =================
 def predict(image):
-    img = cv2.resize(image, (IMG_SIZE, IMG_SIZE)) / 255.0
-    img = np.reshape(img, (1, IMG_SIZE, IMG_SIZE, 3))
-    pred = model.predict(img)
-    return CLASSES[np.argmax(pred)], np.max(pred), img
+    import numpy as np
+    import cv2
 
+    # preprocess image
+    img = cv2.resize(image, (224, 224))
+    img = img / 255.0
+    img = np.expand_dims(img, axis=0)
+
+    # if model exists → real prediction
+    if model is not None:
+        pred = model.predict(img)
+        class_idx = np.argmax(pred)
+        confidence = float(np.max(pred))
+
+        classes = ["NORMAL", "PNEUMONIA", "COVID", "TUMOR"]
+        return classes[class_idx], confidence, img
+
+    # if model not loaded → demo mode
+    else:
+        return "Demo Mode", 0.0, img
 # ================= MAIN APP =================
 if uploaded_files:
 
