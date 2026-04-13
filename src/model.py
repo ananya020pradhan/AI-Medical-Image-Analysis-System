@@ -1,6 +1,7 @@
-from tensorflow.keras.applications import MobileNetV2
-from tensorflow.keras.layers import Dense, Flatten
-from tensorflow.keras.models import Model
+import tensorflow as tf 
+from keras.applications import MobileNetV2
+from keras.layers import Dense, Flatten
+from keras.models import Model
 
 def build_model():
     base_model = MobileNetV2(weights='imagenet', include_top=False, input_shape=(224,224,3))

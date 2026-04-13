@@ -1,7 +1,8 @@
 import streamlit as st
 import cv2
 import numpy as np
-from tensorflow.keras.models import load_model
+import tensorflow as tf
+from keras.models import load_model
 from src.gradcam import get_gradcam
 from src.report import generate_report
 import tempfile
