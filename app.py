@@ -121,21 +121,24 @@ if uploaded_files:
 
             # ================= GRAD-CAM =================
             if show_gradcam:
-                try:
-                    heatmap = get_gradcam(model, processed)
+                if model is not None:
+                    try:
+                        heatmap = get_gradcam(model, processed)
 
-                    heatmap = cv2.resize(heatmap, (IMG_SIZE, IMG_SIZE))
-                    heatmap = np.uint8(255 * heatmap)
-                    heatmap = cv2.applyColorMap(heatmap, cv2.COLORMAP_JET)
+                        heatmap = cv2.resize(heatmap, (IMG_SIZE, IMG_SIZE))
+                        heatmap = np.uint8(255 * heatmap)
+                        heatmap = cv2.applyColorMap(heatmap, cv2.COLORMAP_JET)
 
-                    image_resized = cv2.resize(image, (IMG_SIZE, IMG_SIZE))
+                        image_resized = cv2.resize(image, (IMG_SIZE, IMG_SIZE))
 
-                    overlay = cv2.addWeighted(image_resized, 0.6, heatmap, 0.4, 0)
+                        overlay = cv2.addWeighted(image_resized, 0.6, heatmap, 0.4, 0)
 
-                    st.image(overlay, caption="🔥 Grad-CAM Visualization", use_container_width=True)
+                        st.image(overlay, caption="🔥 Grad-CAM Visualization", use_container_width=True)
 
-                except Exception as e:
-                    st.error(f"Grad-CAM Error: {e}")
+                    except Exception as e:
+                        st.error(f"Grad-CAM Error: {e}")
+                else:
+                    st.info("ℹ️ Grad-CAM not available in Demo Mode")
 
             # ================= REPORT GENERATION =================
             temp = tempfile.NamedTemporaryFile(delete=False, suffix=".jpg")
