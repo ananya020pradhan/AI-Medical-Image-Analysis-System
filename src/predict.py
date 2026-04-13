@@ -2,7 +2,17 @@ import cv2
 import numpy as np
 from tensorflow.keras.models import load_model
 
-model = load_model("models/model.h5")
+import os
+import urllib.request
+
+
+MODEL_PATH = "model.h5"
+
+if not os.path.exists(MODEL_PATH):
+    url = "https://drive.google.com/uc?export=download&id=1lOpMb2k2Bz-rY0j6G9ZcKbFzvtalw62O"
+    urllib.request.urlretrieve(url, MODEL_PATH)
+
+model = load_model(MODEL_PATH)
 
 IMG_SIZE = 224
 CLASSES = ["NORMAL", "PNEUMONIA", "COVID", "TUMOR"]
