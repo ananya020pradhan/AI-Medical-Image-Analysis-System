@@ -1,42 +1,22 @@
-import cv2
-import os
+import numpy as np
 from src.predict import predict_image
 
-def main():
-    print("🧠 AI Medical Image Analysis (CLI Mode)")
-    print("--------------------------------------")
+print("🧠 AI Medical Image Analysis (CLI Mode)")
+print("--------------------------------------")
 
-    image_path = input("Enter image path: ").strip()
+image_path = input("Enter image path: ").strip()
 
-    # Check if file exists
-    if not os.path.exists(image_path):
-        print("❌ Error: File not found")
-        return
+try:
+    # ONLY ONE CALL HERE
+    prediction = predict_image(image_path)
 
-    # Load image
-    image = cv2.imread(image_path)
+    print("\nRaw Prediction:", prediction)
 
-    if image is None:
-        print("❌ Error: Invalid image file")
-        return
+    classes = ["NORMAL", "PNEUMONIA", "COVID"]
 
-    try:
-        # Prediction
-        pred_class, confidence, _ = predict_image(image)
+    result = classes[np.argmax(prediction)]
 
-        print("\n✅ RESULT")
-        print(f"Prediction : {pred_class}")
-        print(f"Confidence : {confidence:.2f}")
+    print("✅ Final Result:", result)
 
-        # Interpretation
-        if pred_class == "NORMAL":
-            print("✔ No disease detected")
-        else:
-            print("⚠ Possible disease detected - consult a doctor")
-
-    except Exception as e:
-        print("❌ Error during prediction:", str(e))
-
-
-if __name__ == "__main__":
-    main()
+except Exception as e:
+    print("❌ Error:", e)

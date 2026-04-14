@@ -1,39 +1,28 @@
+import os
 import cv2
 import numpy as np
 from keras.models import load_model
 
-import os
-import urllib.request
+model = load_model("models/model.h5", compile=False)
 
-model = None
+def predict_image(image_path):
 
-try:
-    from keras.models import load_model
+    # MUST be string only
+    if not isinstance(image_path, str):
+        raise TypeError(f"Expected string path, got {type(image_path)}")
 
-    MODEL_PATH = "model.h5"
+    image_path = image_path.strip()
 
-    if not os.path.exists(MODEL_PATH):
-        url = "https://drive.google.com/uc?export=download&id=1lOpMb2k2Bz-rY0j6G9ZcKbFzvtalw62O"
-        urllib.request.urlretrieve(url, MODEL_PATH)
+    if not os.path.exists(image_path):
+        raise FileNotFoundError(f"File not found: {image_path}")
 
-    model = load_model(MODEL_PATH)
+    img = cv2.imread(image_path)
 
-except:
-    model = None
+    if img is None:
+        raise ValueError("Image could not be read")
 
-IMG_SIZE = 224
-CLASSES = ["NORMAL", "PNEUMONIA", "COVID", "TUMOR"]
+    img = cv2.resize(img, (224,224))
+    img = img / 255.0
+    img = np.expand_dims(img, axis=0)
 
-def predict_image(image):
-    img = cv2.resize(image, (IMG_SIZE, IMG_SIZE)) / 255.0
-    img = np.reshape(img, (1, IMG_SIZE, IMG_SIZE, 3))
-
-    if model is not None:
-        prediction = model.predict(img)
-    else:
-        prediction = "Demo Mode Prediction"
-    
-    pred_class = CLASSES[np.argmax(prediction)]
-    confidence = np.max(prediction)
-
-    return pred_class, confidence, img
+    return model.predict(img)

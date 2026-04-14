@@ -1,143 +1,165 @@
-# 🏥 AI-Powered Medical Image Analysis System
+# 🧠 AI-Powered Medical Image Analysis System
 
-## 🔥 Overview
-This project is an AI-based medical image analysis system that detects diseases such as Pneumonia, COVID-19, Brain Tumor, and Normal cases from X-ray/MRI images using Deep Learning.
+An end-to-end Deep Learning project that classifies Chest X-ray images into **Normal, Pneumonia, and COVID-19** using a Convolutional Neural Network (CNN). The system also provides a simple CLI and Streamlit-based web interface for real-time prediction.
 
-It includes Explainable AI (Grad-CAM), a Streamlit web app, and automated PDF medical report generation with patient details.
+---
 
-⚠️ Educational project only — not for real medical diagnosis.
+## 🚀 Project Overview
+
+This project demonstrates how Artificial Intelligence can assist in medical diagnosis by analyzing chest X-ray images and predicting diseases quickly and efficiently.
+
+It is built using **Deep Learning (CNN)** and designed as a **portfolio-ready, industry-style ML project** using publicly available datasets.
 
 ---
 
 ## 🎯 Problem Statement
-Medical image analysis is:
-- Time-consuming
-- Requires expert radiologists
-- Prone to human error
 
-This system solves it by:
-- Automating disease detection using AI
-- Providing explainable results using Grad-CAM
-- Generating structured medical reports
+Manual diagnosis of chest X-rays:
+- Requires expert radiologists  
+- Is time-consuming  
+- Can be affected by human fatigue  
 
----
-
-## ✨ Features
-- Multi-class disease classification (Normal, Pneumonia, COVID-19, Tumor)
-- CNN / MobileNetV2 deep learning model
-- Grad-CAM heatmap visualization
-- Streamlit interactive dashboard
-- Patient information input system
-- PDF medical report generation
-- Confidence score + severity detection
-- Multi-image upload support
+### 💡 Solution:
+An AI system that:
+- Automatically analyzes X-ray images  
+- Classifies conditions (Normal / Pneumonia / COVID-19)  
+- Assists in faster diagnosis  
+- Reduces workload for healthcare professionals  
 
 ---
 
-## 🛠 Tech Stack
-Python, TensorFlow, Keras, OpenCV, NumPy, Streamlit, Matplotlib, ReportLab
+## 🏥 Medical Use Case
+
+- Chest X-ray screening  
+- Disease detection support system  
+- Radiology assistance tool  
+- Educational AI healthcare project  
 
 ---
 
-## 🧠 System Architecture
-Medical Image Input  
-→ Preprocessing (Resize, Normalize)  
-→ CNN / MobileNetV2 Model  
-→ Disease Prediction  
-→ Grad-CAM Visualization  
-→ Streamlit UI Output  
-→ PDF Report Generation  
+## 🧠 Model Details
+
+- Model Type: Convolutional Neural Network (CNN)  
+- Framework: TensorFlow / Keras  
+- Input Size: 224 x 224 images  
+- Output Classes:
+  - NORMAL  
+  - PNEUMONIA  
+  - COVID-19  
 
 ---
 
-## 🔄 Workflow
-1. Upload medical image  
-2. Image preprocessing  
-3. AI model prediction  
-4. Grad-CAM explanation  
-5. Streamlit UI display  
-6. PDF report generation  
+## 🏗️ System Architecture
+
+Input Image → Preprocessing → CNN Model → Feature Extraction → Softmax Classification → Prediction Output → User Interface (CLI / Streamlit)
 
 ---
 
-## 📂 Project Structure
-AI-Medical-Image-Analysis-System/  
-├── app.py  
-├── main.py  
-├── requirements.txt  
-├── README.md  
-├── models/  
-│   └── model.h5  
-├── src/  
-│   ├── gradcam.py  
-│   ├── report.py  
-│   ├── predict.py  
-│   ├── train.py  
-├── data/  
-├── outputs/  
-└── images/  
+## 📁 Project Structure
+
+AI-Medical-Image-Analysis-System/
+├── data/                  Dataset (Chest X-ray images)
+├── models/
+│   └── model.h5           Trained CNN model
+├── src/
+│   ├── preprocess.py
+│   ├── train.py
+│   ├── predict.py
+│   └── utils.py
+├── app/
+│   └── app.py             Streamlit web app
+├── main.py                CLI interface
+├── requirements.txt
+├── .gitignore
+└── README.md
 
 ---
 
-## ⚙️ Installation
+## ⚙️ Installation & Setup
+
+### Clone Repository
 git clone https://github.com/your-username/AI-Medical-Image-Analysis-System.git  
 cd AI-Medical-Image-Analysis-System  
+
+### Create Virtual Environment
 python -m venv venv  
-source venv/bin/activate (Mac/Linux)  
-venv\Scripts\activate (Windows)  
+
+source venv/bin/activate   (Mac/Linux)  
+venv\Scripts\activate      (Windows)  
+
+### Install Dependencies
 pip install -r requirements.txt  
 
 ---
 
-## 🚀 Run Project
-streamlit run app.py  
+## 🚀 How to Run
+
+### Train Model
+python -m src.train  
+
+### Run CLI Prediction
+python main.py  
+
+### Run Streamlit App
+streamlit run app/app.py  
 
 ---
 
-## 📊 Output
-- Disease prediction result  
-- Confidence score  
-- Grad-CAM heatmap  
-- PDF medical report  
-- Patient-based analysis  
+## 🖥️ Features
+
+✔ AI-based medical image classification  
+✔ Detects Normal, Pneumonia, COVID-19  
+✔ Real-time image upload system  
+✔ Confidence score output  
+✔ Confusion matrix visualization  
+✔ Modular ML pipeline  
 
 ---
 
-## 🌐 Deployment
-- Streamlit Cloud  
-- AWS EC2  
-- HuggingFace Spaces  
+## 📊 Model Performance
+
+- Accuracy: ~85–95% (depends on dataset)
+- Metrics:
+  - Confusion Matrix
+  - Classification Report
+  - Accuracy Graph
 
 ---
 
-## 📚 Learning Outcomes
-- Deep learning model building
-- Medical image preprocessing
-- Explainable AI (Grad-CAM)
-- Streamlit deployment
-- End-to-end ML system design
+## 🧪 Technologies Used
+
+Python, TensorFlow/Keras, OpenCV, NumPy, Matplotlib, Scikit-learn, Streamlit
+
+---
+
+## 📌 Key Learnings
+
+- Deep Learning for medical imaging  
+- CNN architecture design  
+- Image preprocessing techniques  
+- Model evaluation  
+- Streamlit deployment  
+- End-to-end ML pipeline  
 
 ---
 
 ## ⚠️ Disclaimer
-This project is for educational purposes only and not for real medical diagnosis.
+
+This project is for **educational purposes only** and is NOT a medical diagnostic tool.
 
 ---
 
 ## 👨‍💻 Author
+
 Ananya Pradhan  
-BTech IT Student  
-AI | ML | Computer Vision Enthusiast  
-
-## 🔗 Connect with Me
-
-If you want to connect or collaborate, feel free to reach out:
-
-👉 💼 LinkedIn: www.linkedin.com/in/ananya-pradhan-10bb462ba
+B.Tech Information Technology  
+AI / ML Enthusiast  
 
 ---
 
-## ⭐ Support
-If you like this project, please star the repository.
+## 🌟 Future Improvements
 
-
+- Grad-CAM explainability  
+- More disease categories  
+- Cloud deployment  
+- Mobile-friendly UI  

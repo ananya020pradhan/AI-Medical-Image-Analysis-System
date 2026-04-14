@@ -1,22 +1,29 @@
-import tensorflow as tf 
-from keras.applications import MobileNetV2
-from keras.layers import Dense, Flatten
-from keras.models import Model
+from keras.models import Sequential
+from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
 
 def build_model():
-    base_model = MobileNetV2(weights='imagenet', include_top=False, input_shape=(224,224,3))
+    model = Sequential()
 
-    for layer in base_model.layers:
-        layer.trainable = False
+    model.add(Conv2D(32, (3,3), activation='relu', input_shape=(224,224,3)))
+    model.add(MaxPooling2D(2,2))
 
-    x = Flatten()(base_model.output)
-    x = Dense(128, activation='relu')(x)
-    output = Dense(4, activation='softmax')(x)
+    model.add(Conv2D(64, (3,3), activation='relu'))
+    model.add(MaxPooling2D(2,2))
 
-    model = Model(inputs=base_model.input, outputs=output)
+    model.add(Conv2D(128, (3,3), activation='relu'))
+    model.add(MaxPooling2D(2,2))
 
-    model.compile(optimizer='adam',
-                  loss='sparse_categorical_crossentropy',
-                  metrics=['accuracy'])
+    model.add(Flatten())
+
+    model.add(Dense(128, activation='relu'))
+    model.add(Dropout(0.5))
+
+    model.add(Dense(3, activation='softmax'))  # 3 classes
+
+    model.compile(
+        optimizer='adam',
+        loss='sparse_categorical_crossentropy',
+        metrics=['accuracy']
+    )
 
     return model
