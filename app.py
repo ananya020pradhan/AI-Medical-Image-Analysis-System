@@ -1,6 +1,9 @@
 import streamlit as st
 import numpy as np
-import cv2
+try:
+    import cv2
+except Exception:
+    cv2 = None
 from PIL import Image
 from keras.models import load_model
 
