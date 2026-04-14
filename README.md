@@ -78,7 +78,7 @@ AI-Medical-Image-Analysis-System/
 ## ⚙️ Installation & Setup
 
 ### Clone Repository
-git clone https://github.com/your-username/AI-Medical-Image-Analysis-System.git  
+git clone https://github.com/ananya020pradhan/AI-Medical-Image-Analysis-System.git  
 cd AI-Medical-Image-Analysis-System  
 
 ### Create Virtual Environment
@@ -154,6 +154,10 @@ This project is for **educational purposes only** and is NOT a medical diagnosti
 Ananya Pradhan  
 B.Tech Information Technology  
 AI / ML Enthusiast  
+
+## 🔗 Connect with Me
+
+- 💼 LinkedIn: www.linkedin.com/in/ananya-pradhan-10bb462ba
 
 ---
 
